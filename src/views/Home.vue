@@ -36,7 +36,7 @@
                          ></v-text-field>
                         
                           <v-text-field label=" Confirm Password" outlined dense color="blue" autocomplete="false" class="mt-4" type="password"   v-model="confirmPassword"
-                            name="confirmPassword" prepend-inner-icon="mdi-lock" :rules="confirmPasswordRules"  :append-icon="passwordShow ? 'mdi-eye':'mdi-eye-off'" @click:append="passwordShow = !passwordShow" required></v-text-field>
+                            name="confirmPassword" prepend-inner-icon="mdi-lock" :append-icon="passwordShow ? 'mdi-eye':'mdi-eye-off'" @click:append="passwordShow = !passwordShow" required></v-text-field>
                                 <v-col cols="12" sm="7">
                             <v-checkbox label="Remember me" class="mt-n1" ></v-checkbox>
                               </v-col>
@@ -89,7 +89,8 @@
     loading:false,
     snackbar:false,
     passwordShow:false,
-
+    lname:"",
+    fname:"",
     confirmPassword: '',
     email: '',
     emailRules: [
@@ -104,7 +105,7 @@
 
    }),
    props:{
-     source:String
+     source:String,
    },
 
     components: {
