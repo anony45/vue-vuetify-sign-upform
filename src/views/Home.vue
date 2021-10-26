@@ -1,8 +1,11 @@
 <template>
 <v-app>
-<v-main>
+
+<Navbar/>
+
   <v-container>
-    <v-row align="center " justify="center">
+    
+    <v-row class="center " justify="center">
       <v-col cols="12" sm="10">
         <v-card class="elavation-6 mt-10">
           <v-window v-model="step">
@@ -12,9 +15,8 @@
                 <v-form @submit.prevent="submitHandler" ref="form">
                   <v-card-text class="mt-12">
                     <h4 class="text-center">Sign Up for an account</h4>
-                    
             
-                    <v-row align="center" justify="center">
+                    <v-row class="center" justify="center">
                       <v-col cols="12" sm="8">
                       
                         <v-row>
@@ -31,12 +33,12 @@
                          v-model="email"  :rules="emailRules"  prepend-inner-icon="mdi-account" required
                          ></v-text-field>
                          <v-text-field v-model="password" :rules="passwordRules" label="Password" outlined dense color="blue" autocomplete="false" class="mt-4" type="password"
-                         prepend-inner-icon="mdi-lock" :append-icon="passwordShow ? 'mdi-eye':'mdi-eye-off'" @click:append="passwordShow = !passwordShow" required
+                         prepend-inner-icon="mdi-lock" :append-icon="show ? 'mdi-eye':'mdi-eye-off'" @click:append="show = !show" required
                          
                          ></v-text-field>
                         
-                          <v-text-field label=" Confirm Password" outlined dense color="blue" autocomplete="false" class="mt-4" type="password"   v-model="confirmPassword"
-                            name="confirmPassword" prepend-inner-icon="mdi-lock" :append-icon="passwordShow ? 'mdi-eye':'mdi-eye-off'" @click:append="passwordShow = !passwordShow" required></v-text-field>
+                          <v-text-field v-model="confirmPassword" :rules="[(password === confirmPassword) || 'Password must match']" label=" Confirm Password"  outlined dense color="blue" autocomplete="false" class="mt-4" type="password"   
+                           prepend-inner-icon="mdi-lock" :append-icon="show ? 'mdi-eye':'mdi-eye-off'" @click:append="show = !show"  required></v-text-field>
                                 <v-col cols="12" sm="7">
                             <v-checkbox label="Remember me" class="mt-n1" ></v-checkbox>
                               </v-col>
@@ -74,7 +76,8 @@
     
     </v-row>
 </v-container>
-</v-main>
+
+
   <v-snackbar top color="green" v-model="snackbar">
       Login success
     </v-snackbar>
@@ -82,16 +85,21 @@
 </template>
 
 <script>
+import Navbar from '@/components/Navbar'
+
 
   export default {
    data: () => ({
      step:1,
     loading:false,
     snackbar:false,
-    passwordShow:false,
+    show:true,
     lname:"",
     fname:"",
     confirmPassword: '',
+
+    
+
     email: '',
     emailRules: [
       v => !!v || 'E-mail is required',
@@ -103,14 +111,16 @@
       v => (v && v.length >= 6) || 'Password must be 6  characters or more!',
     ],
 
+
    }),
    props:{
      source:String,
    },
+   components:{
+    Navbar
+  },
 
-    components: {
-     
-    },
+  
     methods:{
     submitHandler(){
       if (this.$refs.form.validate()){
@@ -120,8 +130,9 @@
           this.snackbar = true
         },3000)
       }
-    }
-  }
+    },
+},
+ 
   }
 </script>
 <style scoped>
