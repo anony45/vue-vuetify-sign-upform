@@ -11,8 +11,8 @@
                 <v-col cols="12" sm="6">
                 <v-form @submit.prevent="submitHandler" ref="form">
                   <v-card-text class="mt-12">
-                    <h4 class="text-center">Login into your account</h4>
-                    <h6 class="text-center grey--text">Login into your account  <i class="fa fa-low-vision" aria-hidden="true"></i></h6>
+                    <h4 class="text-center">Sign Up for an account</h4>
+                    
             
                     <v-row align="center" justify="center">
                       <v-col cols="12" sm="8">
